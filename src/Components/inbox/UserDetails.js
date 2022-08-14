@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
 import axiosPrivet from "../../Hooks/axiosPrivet";
 import auth from "../../Hooks/Firebase";
 import Loading from "../share/Loading";
@@ -77,19 +76,21 @@ const UserDetails = ({ selectUser, setTogglePage }) => {
             )}
           </p>
         )}
-        <p className="text-neutral text-xl">
-          Send Requests:{" "}
-          {myDetails?.sendRequest ? (
-            <span
-              onClick={() => setTogglePage("friendsRequest", " ")}
-              className={"cursor-pointer text-blue-600"}
-            >
-              see all ({myDetails?.sendRequest.length})
-            </span>
-          ) : (
-            "None"
-          )}
-        </p>
+        {!selectUser.name && (
+          <p className="text-neutral text-xl">
+            Send Requests:{" "}
+            {myDetails?.sendRequest ? (
+              <span
+                onClick={() => setTogglePage("friendsRequest", " ")}
+                className={"cursor-pointer text-blue-600"}
+              >
+                see all ({myDetails?.sendRequest.length})
+              </span>
+            ) : (
+              "None"
+            )}
+          </p>
+        )}
       </div>
     </div>
   );

@@ -9,7 +9,6 @@ import user1 from "../../assets/images/user1.png";
 import axiosPrivet from "../../Hooks/axiosPrivet";
 import auth from "../../Hooks/Firebase";
 import Loading from "../share/Loading";
-import { useQuery } from "react-query";
 
 const User = ({ user, setSelectUser, select, selectFriends, setSelectFriends, setRefetch }) => {
   const [userM, loading] = useAuthState(auth);

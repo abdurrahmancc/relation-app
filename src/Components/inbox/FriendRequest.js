@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import axiosPrivet from "../../Hooks/axiosPrivet";
