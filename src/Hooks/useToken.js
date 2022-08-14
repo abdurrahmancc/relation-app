@@ -13,7 +13,7 @@ const useToken = (user) => {
     (async () => {
       if (email && name) {
         const { data } = await axiosPrivet.put(`user/login`, currentUser);
-        console.log(data);
+        // console.log(data);
         if (data?.token) {
           localStorage.setItem("accessToken", data?.token);
           setToken(data?.token);

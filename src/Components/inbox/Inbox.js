@@ -143,13 +143,14 @@ const Inbox = () => {
         return;
       }
       const { data } = await axiosPrivet.post("user/relation", { friends: selectFriends });
-      console.log(data);
+      // console.log(data);
       if (data) {
         const isFriend1 = data[1].friends.find((friend) => friend === selectFriends[0]);
         const isFriend2 = data[1].friends.find((friend) => friend === selectFriends[1]);
         // console.log(isFriend2);
         if (isFriend1 || isFriend2) {
           setRelationFriend([data[0].name, data[1].name]);
+
           toast.success(`${data[0].name} and ${data[1].name} there are friend`);
         } else {
           handleSearchRelation();
@@ -159,6 +160,7 @@ const Inbox = () => {
       toast.error(error.message, { id: "relationError" });
     }
   };
+
   return (
     <div className="grid grid-cols-4 relative">
       <div className="col-span-1 bg-secondary h-[800px] rounded-l-xl">
@@ -180,7 +182,7 @@ const Inbox = () => {
         <div className="flex gap-2 absolute bottom-5 mx-5">
           <button
             onClick={() => setSelect(!select)}
-            className="btn btn-success rounded-none max-w-[100px]  w-full"
+            className="btn btn-success rounded-none xl:max-w-[100px] lg:max-w-[80px] max-w-[50px] w-full"
           >
             select
           </button>
@@ -188,7 +190,7 @@ const Inbox = () => {
             for="relationModal"
             onClick={() => handleRelation()}
             disabled={selectFriends.length !== 2}
-            class="btn modal-button btn-success rounded-none max-w-[100px] disabled-btn w-full"
+            class="btn modal-button btn-success rounded-none xl:max-w-[100px] lg:max-w-[80px] max-w-[50px] disabled-btn w-full"
           >
             Relation
           </label>
@@ -218,7 +220,13 @@ const Inbox = () => {
               <div class=" text-sm breadcrumbs flex justify-center ">
                 <ul>
                   {relationFriend.map((friend, index) => (
-                    <li key={index}>{friend}</li>
+                    <li key={index}>
+                      {friend ? (
+                        friend
+                      ) : (
+                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-base-300"></div>
+                      )}
+                    </li>
                   ))}
                 </ul>
               </div>

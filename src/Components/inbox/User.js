@@ -18,7 +18,7 @@ const User = ({ user, setSelectUser, select, selectFriends, setSelectFriends, se
   useEffect(() => {
     (async () => {
       const { data } = await axiosPrivet.get(`user/isFriend/${user.email}`);
-      console.log(data, userM.email);
+      // console.log(data, userM.email);
       if (data?.friends) {
         const existRequest = data?.friends.find((friend) => friend === userM?.email);
         if (existRequest) {
@@ -48,19 +48,29 @@ const User = ({ user, setSelectUser, select, selectFriends, setSelectFriends, se
     const currentUser = { email: userM?.email };
     try {
       const { data } = await axiosPrivet.put(`user/friend-request/${id}`, currentUser);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleSelectFriends = (email) => {
-    // let friends = { ...selectFriends, [email]: true };
-    let friends = [...selectFriends, email];
-    console.log(friends);
+    if (selectFriends.length !== 0) {
+      const isExist = selectFriends.find((friend) => email.match(friend));
+      if (isExist) {
+        const inputFriends = selectFriends.filter((friend) => friend !== email);
+        setSelectFriends(inputFriends);
+        return;
+      }
+      const friends = [...selectFriends, email];
+      setSelectFriends(friends);
+      return;
+    }
+    const friends = [email];
     setSelectFriends(friends);
   };
 
+  console.log(selectFriends);
   return (
     <>
       <div
