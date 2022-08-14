@@ -12,5 +12,5 @@
 <li>daisy UI</li>
 
 
- [live lite](https://relation-application.firebaseapp.com).
+ [live site](https://relation-application.firebaseapp.com).
 
